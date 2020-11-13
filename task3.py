@@ -1,14 +1,9 @@
 """
-
 A* grid planning
-
 author: Atsushi Sakai(@Atsushi_twi)
         Nikos Kanargias (nkana@tee.gr)
-
 See Wikipedia article (https://en.wikipedia.org/wiki/A*_search_algorithm)
-
 This is the simple code for path planning class
-
 """
 
 
@@ -25,7 +20,6 @@ class AStarPlanner:
     def __init__(self, ox, oy, resolution, rr, fc_x, fc_y, tc_x, tc_y, mc_x, mc_y):
         """
         Initialize grid map for a star planning
-
         ox: x position list of Obstacles [m]
         oy: y position list of Obstacles [m]
         resolution: grid resolution [m]
@@ -52,7 +46,7 @@ class AStarPlanner:
         self.C_F = 1
         self.C_T = 2
         self.C_C = 10 
-        self.Delta_F = 1 
+        self.Delta_F = 1
         self.Delta_T = 5 
         self.Delta_T_A = 0.2 # additional time 
         self.Delta_F_A = 0.2 # additional fuel
@@ -75,13 +69,11 @@ class AStarPlanner:
     def planning(self, sx, sy, gx, gy):
         """
         A star path search
-
         input:
             s_x: start x position [m]
             s_y: start y position [m]
             gx: goal x position [m]
             gy: goal y position [m]
-
         output:
             rx: x position list of the final path
             ry: y position list of the final path
@@ -156,7 +148,7 @@ class AStarPlanner:
                 if self.calc_grid_position(node.x, self.min_x) in self.mc_x:
                     if self.calc_grid_position(node.y, self.min_y) in self.mc_y:
                         # print("minus cost area!!")
-                        node.cost = node.cost - self.Delta_P * self.motion[i][2]
+                        node.cost = self.Delta_P * self.motion[i][2]
                     # print()
 
                 
@@ -211,7 +203,6 @@ class AStarPlanner:
     def calc_grid_position(self, index, min_position):
         """
         calc grid position
-
         :param index:
         :param min_position:
         :return:
@@ -313,7 +304,7 @@ def main():
     for i in range(-10, 61):
         ox.append(-10.0)
         oy.append(i)
-    for i in range(-10, 35):
+    for i in range(-10, 36):
         ox.append(i)
         oy.append(i+15)
     for i in range(25, 60):
@@ -323,27 +314,29 @@ def main():
     
     # set fuel consuming area
     fc_x, fc_y = [], []
-    for i in range(10, 25):
-        for j in range(30, 55):
+    for i in range(10, 26):
+        for j in range(30, 56):
             fc_x.append(i)
             fc_y.append(j)
     
     # set time consuming area
     tc_x, tc_y = [], []
-    for i in range(20, 38):
-        for j in range(10, 25):
+    for i in range(20, 39):
+        for j in range(10, 26):
             tc_x.append(i)
             tc_y.append(j)
     
     # set minus cost area
     mc_x, mc_y = [], []
-    for i in range(54, 55):
-        for j in range(34,50 ):
+    for i in range(24,34):
             mc_x.append(i)
-            mc_y.append(j)
-
-
-
+            mc_y.append(i-24)
+    for i in range(25,26):
+            mc_x.append(i)
+            mc_y.append(-1)
+    for i in range(26,29):
+            mc_x.append(i)
+            mc_y.append(i-26)    
 
     if show_animation:  # pragma: no cover
         plt.plot(ox, oy, ".k") # plot the obstacle
