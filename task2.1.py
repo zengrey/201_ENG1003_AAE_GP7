@@ -302,7 +302,7 @@ def main():
     for i in range(-10, 61):
         ox.append(-10.0)
         oy.append(i)
-    for i in range(-10, 35):
+    for i in range(-10, 36):
         ox.append(i)
         oy.append(i+15)
     for i in range(25, 60):
@@ -312,15 +312,15 @@ def main():
     
     # set fuel consuming area
     fc_x, fc_y = [], []
-    for i in range(10, 25):
-        for j in range(30, 55):
+    for i in range(10, 26):
+        for j in range(30, 56):
             fc_x.append(i)
             fc_y.append(j)
     
     # set time consuming area
     tc_x, tc_y = [], []
-    for i in range(20, 38):
-        for j in range(10, 25):
+    for i in range(20, 39):
+        for j in range(10, 26):
             tc_x.append(i)
             tc_y.append(j)
 
